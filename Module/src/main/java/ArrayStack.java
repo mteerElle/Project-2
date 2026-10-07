@@ -4,7 +4,7 @@ public class ArrayStack {
 
     //fields
     public Objects[] arr;
-    
+
 
     //Constructor
     public ArrayStack(String eval){
