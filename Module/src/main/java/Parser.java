@@ -32,7 +32,7 @@ public class Parser {
             //only when it's not error, do the actual operations
             for (int i = 0; i < stringArr.length; i++) {
                 if (Integer.parseInt(stringArr[i]) < Integer.MAX_VALUE) {
-                    ASTStack.push(new NumNode(i));
+                    ArrayStack.push(new NumNode(i));
                 }
                 //where does BinopNode take in an operator?
                 else if (stringArr[i].equals("/") || stringArr[i].equals("+").....){
