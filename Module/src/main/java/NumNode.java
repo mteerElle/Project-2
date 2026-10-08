@@ -1,4 +1,4 @@
-public class NumNode implements AST{
+public class NumNode{
     double dval;
 
     NumNode(double dval){

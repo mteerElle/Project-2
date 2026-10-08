@@ -1,2 +1,2 @@
-public class BinopNode implements AST {
+public class BinopNode {
 }
