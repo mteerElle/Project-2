@@ -3,12 +3,12 @@ import java.util.Objects;
 public class ArrayStack {
 
     //fields
-    public Object[] arr;
+    public AST[] arr;
     public int alive;
 
     //Constructor
     public ArrayStack(){
-        arr = new Object[10];
+        arr = new AST[10];
         alive= 0;
     }
 
@@ -16,7 +16,7 @@ public class ArrayStack {
         return new ArrayStack();
     }
 
-    public void push( Object t){
+    public void push( AST t){
         arr[alive] = t;
         alive++;
     }
