@@ -32,12 +32,12 @@ public class Parser {
             //only when it's not error, do the actual operations
             for (int i = 0; i < stringArr.length; i++) {
                 if (Integer.parseInt(stringArr[i]) < Integer.MAX_VALUE) {
-                    ASTStack.push(new NumNode(i));
+                    AST.push(new NumNode(i));
                 }
                 //where does BinopNode take in an operator?
                 else if (stringArr[i].equals("/") || stringArr[i].equals("+").....){
-                    BinopNode expr = new BinopNode(i, ASTStack.pop(), ASTStack.pop());
-                    ASTStack.push(expr);
+                    BinopNode expr = new BinopNode(i, AST.pop(), AST.pop());
+                    AST.push(expr);
                 }
             }
             //would it be ASTStack.pop()?
