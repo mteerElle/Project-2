@@ -3,12 +3,49 @@ import java.util.Objects;
 public class ArrayStack {
 
     //fields
-    public Objects[] arr;
-
+    public Object[] arr;
+    public int alive;
 
     //Constructor
-    public ArrayStack(String eval){
+    public ArrayStack(){
+        arr = new Object[10];
+        alive= 0;
+    }
 
-        arr = new Objects[5];
+    public ArrayStack emptyStack(){
+        return new ArrayStack();
+    }
+
+    public void push( Object t){
+        arr[alive] = t;
+        alive++;
+    }
+
+    public Object pop(){
+        if(alive ==0){
+            throw new IndexOutOfBoundsException();
+        }
+        Object o = arr[alive];
+        arr[alive]=null;
+        alive--;
+        return o;
+    }
+
+    public Object peek(){
+        if(alive==0){
+            throw new IndexOutOfBoundsException();
+        }
+        return arr[alive];
+    }
+
+    public boolean isEmpty(){
+        if(alive ==0){
+            return true;
+        }
+        return false;
+    }
+
+    public int size(){
+        return alive;
     }
 }
