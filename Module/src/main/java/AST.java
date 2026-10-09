@@ -1,26 +1,18 @@
 public interface AST {
 
-
-/*
- public class ASTStack {
-     AST branch1;
-     AST branch2;
-
-     public ASTStack(AST node1, AST node2) {
-         branch1 = node1;
-
-         branch2 = node2;
-
-     }
-     }
- */
+    public record numx(int num){}
+    public record multx(AST n1, AST n2){}
+    public record divx(AST n1, AST n2){}
+    public record minx(AST n1, AST n2){}
+    public record plusx(AST n1, AST n2){}
+    public record powx(AST n1, AST n2){}
 
     public double eval(){
         if(this instanceof NumNode){
             return this.dval;
         }
         else{
-
+            return this.branch1.eval() + this.branch2.eval();
         }
     }
 }

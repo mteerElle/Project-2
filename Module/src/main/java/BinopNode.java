@@ -1,5 +1,6 @@
 public class BinopNode implements AST{
 
+
         AST branch1;
         AST branch2;
 
