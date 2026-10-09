@@ -1,6 +1,7 @@
 public interface AST {
 
 
+/*
  public class ASTStack {
      AST branch1;
      AST branch2;
@@ -11,6 +12,15 @@ public interface AST {
          branch2 = node2;
 
      }
- }
+     }
+ */
 
+    public double eval(){
+        if(this instanceof NumNode){
+            return this.dval;
+        }
+        else{
+
+        }
+    }
 }

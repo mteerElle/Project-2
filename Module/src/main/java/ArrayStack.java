@@ -48,4 +48,6 @@ public class ArrayStack {
     public int size(){
         return alive;
     }
+
+
 }
