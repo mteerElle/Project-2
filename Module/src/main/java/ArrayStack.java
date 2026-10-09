@@ -12,7 +12,7 @@ public class ArrayStack {
         alive= 0;
     }
 
-    public ArrayStack emptyStack(){
+    public static ArrayStack emptyStack(){
         return new ArrayStack();
     }
 

@@ -17,7 +17,6 @@ public class Parser {
             if(Integer.parseInt(stringArr[i]) < Integer.MAX_VALUE){
                 numCount++;
             }
-            //where does BinopNode take in an operator?
             else if(stringArr[i].equals("/") || stringArr[i].equals("+") || stringArr[i].equals("^")
                     || stringArr[i].equals("*")){
                 operCount++;
@@ -37,6 +36,7 @@ public class Parser {
                     a.push(new NumNode(i));
                 }
                 //where does BinopNode take in an operator?
+                //need to appy the operation somehow?
                 else if (stringArr[i].equals("/") || stringArr[i].equals("+") || stringArr[i].equals("^")
                         || stringArr[i].equals("*")){
                     BinopNode expr = new BinopNode((AST) a.pop(), (AST)a.pop());
@@ -46,5 +46,11 @@ public class Parser {
             //would it be ASTStack.pop()?
             return a;
         }
+    }
+
+    public ArrayStack parseInfix(){
+         ArrayStack operations = new ArrayStack();
+         ArrayStack value = new ArrayStack();
+
     }
 }
