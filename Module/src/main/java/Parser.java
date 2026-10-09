@@ -52,7 +52,7 @@ public class Parser {
          ArrayStack operations = new ArrayStack();
          ArrayStack value = new ArrayStack();
          //check for errors
-        for()
+
 
     }
 }
