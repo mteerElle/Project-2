@@ -48,10 +48,14 @@ public class Parser {
         }
     }
 
-    public ArrayStack parseInfix(){
+    public AST parseInfix(String s){
          ArrayStack operations = new ArrayStack();
          ArrayStack value = new ArrayStack();
          //check for errors
+        String[] stringArr = s.split(" ");
+        for(int i=0;i<stringArr.length;i++){
+
+        }
 
 
     }

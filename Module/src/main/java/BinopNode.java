@@ -1,4 +1,4 @@
-public record BinopNode(AST n1, AST n2) implements AST{
+public record BinopNode(String op, AST n1, AST n2) implements AST{
 
     public record multx(AST n1, AST n2){}
     public record divx(AST n1, AST n2){}
