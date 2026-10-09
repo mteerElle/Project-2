@@ -54,7 +54,9 @@ public class Parser {
          //check for errors
         String[] stringArr = s.split(" ");
         for(int i=0;i<stringArr.length;i++){
-
+            if(/*it is a number*/){
+                value.push(new numNode())
+            }
         }
 
 
