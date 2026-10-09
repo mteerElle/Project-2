@@ -1,5 +1,6 @@
 public class Parser {
      public AST parsePostfix(String s){
+         //maybe create a helper function to check for errors
         if(s.equals(" ")){
             throw new IllegalArgumentException("empty input");
         }
@@ -39,11 +40,10 @@ public class Parser {
                 //need to appy the operation somehow?
                 else if (stringArr[i].equals("/") || stringArr[i].equals("+") || stringArr[i].equals("^")
                         || stringArr[i].equals("*")){
-                    BinopNode expr = new BinopNode(stringArr[i], (AST) a.pop(), (AST)a.pop());
+                    BinopNode expr = new BinopNode(stringArr[i], (AST) a.pop(), (AST) a.pop());
                     a.push(expr);
                 }
             }
-            //would it be ASTStack.pop()?
             return (AST) a;
         }
     }
@@ -51,6 +51,8 @@ public class Parser {
     public ArrayStack parseInfix(){
          ArrayStack operations = new ArrayStack();
          ArrayStack value = new ArrayStack();
+         //check for errors
+        for()
 
     }
 }
