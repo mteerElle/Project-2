@@ -12,14 +12,14 @@ public class Parser {
             //should it be if, if, else if?
             //need to check if it's a number
             if(stringArr[i]!="/" && stringArr[i]!="+" && stringArr[i]!="^"
-                    && stringArr[i]!="*"){
+                    && stringArr[i]!="*" || stringArr[i]!=("-")){
                 throw new IllegalArgumentException("invalid token");
             }
             if(Integer.parseInt(stringArr[i]) < Integer.MAX_VALUE){
                 numCount++;
             }
             else if(stringArr[i].equals("/") || stringArr[i].equals("+") || stringArr[i].equals("^")
-                    || stringArr[i].equals("*")){
+                    || stringArr[i].equals("*") || stringArr[i].equals("-")){
                 operCount++;
             }
         }
@@ -39,7 +39,7 @@ public class Parser {
                 //where does BinopNode take in an operator?
                 //need to appy the operation somehow?
                 else if (stringArr[i].equals("/") || stringArr[i].equals("+") || stringArr[i].equals("^")
-                        || stringArr[i].equals("*")){
+                        || stringArr[i].equals("*") || stringArr[i].equals("-")){
                     BinopNode expr = new BinopNode(stringArr[i], (AST) a.pop(), (AST) a.pop());
                     a.push(expr);
                 }
@@ -55,7 +55,11 @@ public class Parser {
         String[] stringArr = s.split(" ");
         for(int i=0;i<stringArr.length;i++){
             if(/*it is a number*/){
-                value.push(new numNode())
+                value.push(new NumNode(Integer.parseInt(stringArr[i])));
+            }
+            else if(stringArr[i].equals("/") || stringArr[i].equals("+") || stringArr[i].equals("^")
+                    || stringArr[i].equals("*")){
+                operations.push(stringArr[i]);
             }
         }
 
