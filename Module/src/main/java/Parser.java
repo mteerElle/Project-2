@@ -1,6 +1,5 @@
 public class Parser {
-
-    static AST parsePostfix(String s){
+     public ArrayStack parsePostfix(String s){
         if(s.equals(" ")){
             throw new IllegalArgumentException("empty input");
         }
@@ -10,15 +9,16 @@ public class Parser {
         int operCount = 0;
         for(int i=0;i<stringArr.length;i++){
             //should it be if, if, else if?
-            if(!(Integer.parseInt(stringArr[i]) < Integer.MAX_VALUE) || stringArr[i]!="/"
-                    .....){
+            //need to check if it's a number
+            if(stringArr[i]!="/" && stringArr[i]!="+" && stringArr[i]!="^"
+                    && stringArr[i]!="*"){
                 throw new IllegalArgumentException("invalid token");
             }
             if(Integer.parseInt(stringArr[i]) < Integer.MAX_VALUE){
                 numCount++;
             }
-            //where does BinopNode take in an operator?
-            else if(stringArr[i].equals("/") || stringArr[i].equals("+").....){
+            else if(stringArr[i].equals("/") || stringArr[i].equals("+") || stringArr[i].equals("^")
+                    || stringArr[i].equals("*")){
                 operCount++;
             }
         }
@@ -30,18 +30,27 @@ public class Parser {
         }
         else {
             //only when it's not error, do the actual operations
+            ArrayStack a = new ArrayStack();
             for (int i = 0; i < stringArr.length; i++) {
                 if (Integer.parseInt(stringArr[i]) < Integer.MAX_VALUE) {
-                    ArrayStack.push(new NumNode(i));
+                    a.push(new NumNode(i));
                 }
                 //where does BinopNode take in an operator?
-                else if (stringArr[i].equals("/") || stringArr[i].equals("+").....){
-                    BinopNode expr = new BinopNode(i, ASTStack.pop(), ASTStack.pop());
-                    ASTStack.push(expr);
+                //need to appy the operation somehow?
+                else if (stringArr[i].equals("/") || stringArr[i].equals("+") || stringArr[i].equals("^")
+                        || stringArr[i].equals("*")){
+                    BinopNode expr = new BinopNode((AST) a.pop(), (AST)a.pop());
+                    a.push(expr);
                 }
             }
             //would it be ASTStack.pop()?
-            return ASTStack;
+            return a;
         }
+    }
+
+    public ArrayStack parseInfix(){
+         ArrayStack operations = new ArrayStack();
+         ArrayStack value = new ArrayStack();
+
     }
 }
