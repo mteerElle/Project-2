@@ -7,10 +7,9 @@ public class BinopNode implements AST{
     public record powx(AST n1, AST n2){}
         AST branch1;
         AST branch2;
-        String operator;
 
-        public BinopNode(String op, AST node1, AST node2) {
-            operator = op;
+
+        public BinopNode( AST node1, AST node2) {
             branch1 = node1;
             branch2 = node2;
 
