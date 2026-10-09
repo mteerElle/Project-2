@@ -1,5 +1,5 @@
 public class Parser {
-     public ArrayStack parsePostfix(String s){
+     public AST parsePostfix(String s){
         if(s.equals(" ")){
             throw new IllegalArgumentException("empty input");
         }
@@ -39,12 +39,12 @@ public class Parser {
                 //need to appy the operation somehow?
                 else if (stringArr[i].equals("/") || stringArr[i].equals("+") || stringArr[i].equals("^")
                         || stringArr[i].equals("*")){
-                    BinopNode expr = new BinopNode((AST) a.pop(), (AST)a.pop());
+                    BinopNode expr = new BinopNode(stringArr[i], (AST) a.pop(), (AST)a.pop());
                     a.push(expr);
                 }
             }
             //would it be ASTStack.pop()?
-            return a;
+            return (AST) a;
         }
     }
 
