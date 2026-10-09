@@ -1,6 +1,10 @@
 public class BinopNode implements AST{
 
-
+    public record multx(AST n1, AST n2){}
+    public record divx(AST n1, AST n2){}
+    public record minx(AST n1, AST n2){}
+    public record plusx(AST n1, AST n2){}
+    public record powx(AST n1, AST n2){}
         AST branch1;
         AST branch2;
         String operator;
