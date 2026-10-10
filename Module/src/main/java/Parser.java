@@ -27,7 +27,6 @@ public class Parser {
     }
 
     public static AST parsePostfix(String s){
-         //maybe create a helper function to check for errors
         if (s.trim().isEmpty()) {
             throw new IllegalArgumentException("empty input");
         }
@@ -88,7 +87,7 @@ public class Parser {
                     || stringArr[i].equals("*") || stringArr[i].equals("-")){
                 while(!operations.isEmpty() && !operations.peek().equals("(") && (precedence(operations.peek())
                         > precedence(stringArr[i]) || (precedence(operations.peek()) == precedence(stringArr[i])
-                        && !(isRightAssociative(stringArr[i]))))){{
+                        && !(isRightAssociative(stringArr[i]))))){
                     if(value.size() < 2){
                         throw new IllegalArgumentException("insufficient operands");
                     }
