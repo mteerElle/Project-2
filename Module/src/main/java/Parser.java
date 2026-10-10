@@ -77,7 +77,7 @@ public class Parser {
             //need to check if it's a number or operator
             if(!(isNumber(stringArr[i])) && !(stringArr[i].equals("/")) && !(stringArr[i].equals("+")) && !(stringArr[i].equals("^"))
                     && !(stringArr[i].equals("*")) && !(stringArr[i].equals("-")) && !(stringArr[i].equals("(")) &&
-            !(stringArr[i].equals("("))){
+            !(stringArr[i].equals(")"))){
                 throw new IllegalArgumentException("invalid token");
             }
         }
@@ -89,32 +89,31 @@ public class Parser {
             }
             else if(stringArr[i].equals("/") || stringArr[i].equals("+") || stringArr[i].equals("^")
                     || stringArr[i].equals("*") || stringArr[i].equals("-")){
-                if(operations.size()==0){
-                    operations.push(stringArr[i]);
-                }
                 while(!operations.isEmpty() && !operations.peek().equals("(") && precedence(operations.peek()) > precedence(stringArr[i]) ||
                         precedence(operations.peek()) == precedence(stringArr[i]) &&
                         !(isRightAssociative(stringArr[i]))){
-                    if(!(value.size() >=2)){
+                    if(value.size() < 2){
                         throw new IllegalArgumentException("insufficient operands");
                     }
                     AST right = value.pop();
                     AST left = value.pop();
                     BinopNode expr = new BinopNode(operations.pop(), left,right);
                     value.push(expr);
-                    operations.push(stringArr[i]);
                 }
+                operations.push(stringArr[i]);
             }
             else if(stringArr[i].equals("(")){
                 operations.push(stringArr[i]);
             }
             else if(stringArr[i].equals(")")){
-                while(!(operations.peek().equals("(")) && !operations.isEmpty()){
+                while(!operations.isEmpty() && !(operations.peek().equals("(")) ){
+                    if(value.size() < 2){
+                        throw new IllegalArgumentException("insufficient operands");
+                    }
                     AST right = value.pop();
                     AST left = value.pop();
                     BinopNode expr = new BinopNode(operations.pop(), left,right);
                     value.push(expr);
-                    operations.push(stringArr[i]);
                 }
                 if (operations.isEmpty()) {
                     throw new IllegalArgumentException("mismatched close paren");
@@ -122,19 +121,23 @@ public class Parser {
                 operations.pop();
             }
         }
-
-
          while(!operations.isEmpty()) {
              if(operations.peek().equals("(")){
                  throw new IllegalArgumentException("mismatched open paren");
+             }
+             if(value.size() < 2){
+                 throw new IllegalArgumentException("insufficient operands");
              }
              AST right = value.pop();
              AST left = value.pop();
              BinopNode expr = new BinopNode(operations.pop(), left,right);
              value.push(expr);
          }
-        if(!(value.size()==1)){
+        if(value.size()>1){
             throw new IllegalArgumentException("too many operands");
+        }
+        if(value.size()==0){
+            throw new IllegalArgumentException("insufficient operands");
         }
         return value.pop();
 
