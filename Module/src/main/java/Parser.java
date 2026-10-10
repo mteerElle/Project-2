@@ -46,10 +46,9 @@ public class Parser {
             if(isNumber(stringArr[i])) {
                 a.push(new NumNode(Double.parseDouble(stringArr[i])));
             }
-            //need to appy the operation somehow?
             else if (stringArr[i].equals("/") || stringArr[i].equals("+") || stringArr[i].equals("^")
                     || stringArr[i].equals("*") || stringArr[i].equals("-")){
-                if(!(a.size() >=2)){
+                if(!(a.size()>=2)){
                     throw new IllegalArgumentException("insufficient operands");
                 }
                 AST right = a.pop();
