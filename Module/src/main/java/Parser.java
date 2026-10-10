@@ -1,5 +1,14 @@
 public class Parser {
-     public AST parsePostfix(String s){
+     public static boolean isNumber(String s){
+         try{
+             Double.parseDouble(s);
+             return true;
+         } catch (Exception e) {
+             return false;
+         }
+     }
+
+    public AST parsePostfix(String s){
          //maybe create a helper function to check for errors
         if(s.equals(" ")){
             throw new IllegalArgumentException("empty input");
@@ -11,11 +20,11 @@ public class Parser {
         for(int i=0;i<stringArr.length;i++){
             //should it be if, if, else if?
             //need to check if it's a number
-            if(stringArr[i]!="/" && stringArr[i]!="+" && stringArr[i]!="^"
-                    && stringArr[i]!="*" || stringArr[i]!=("-")){
+            if(!(isNumber(stringArr[i])) && !(stringArr[i].equals("/")) && !(stringArr[i].equals("+")) && !(stringArr[i].equals("^"))
+                    && !(stringArr[i].equals("*")) && !(stringArr[i].equals("-"))){
                 throw new IllegalArgumentException("invalid token");
             }
-            if(Integer.parseInt(stringArr[i]) < Integer.MAX_VALUE){
+            if(isNumber(stringArr[i])){
                 numCount++;
             }
             else if(stringArr[i].equals("/") || stringArr[i].equals("+") || stringArr[i].equals("^")
@@ -34,7 +43,7 @@ public class Parser {
             ArrayStack a = new ArrayStack();
             for (int i = 0; i < stringArr.length; i++) {
                 if (Integer.parseInt(stringArr[i]) < Integer.MAX_VALUE) {
-                    a.push(new NumNode(i));
+                    a.push(new NumNode(Double.parseDouble(stringArr[i])));
                 }
                 //where does BinopNode take in an operator?
                 //need to appy the operation somehow?
