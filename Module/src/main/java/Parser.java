@@ -59,9 +59,25 @@ public class Parser {
             }
             else if(stringArr[i].equals("/") || stringArr[i].equals("+") || stringArr[i].equals("^")
                     || stringArr[i].equals("*")){
+                if(value.size()==2){
+                    BinopNode expr = new BinopNode(stringArr[i], (AST) value.pop(), (AST) value.pop());
+                }
                 operations.push(stringArr[i]);
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     }

@@ -21,17 +21,17 @@ public class ArrayStack {
         alive++;
     }
 
-    public Object pop(){
+    public AST pop(){
         if(alive ==0){
             throw new IndexOutOfBoundsException();
         }
-        Object o = arr[alive];
+        AST o = arr[alive];
         arr[alive]=null;
         alive--;
         return o;
     }
 
-    public Object peek(){
+    public AST peek(){
         if(alive==0){
             throw new IndexOutOfBoundsException();
         }
