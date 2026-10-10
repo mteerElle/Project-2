@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Parser {
      public static boolean isNumber(String s){
          try{
@@ -140,20 +138,5 @@ public class Parser {
             throw new IllegalArgumentException("insufficient operands");
         }
         return value.pop();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
