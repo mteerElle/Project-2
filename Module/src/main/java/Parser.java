@@ -10,54 +10,41 @@ public class Parser {
 
     public static AST parsePostfix(String s){
          //maybe create a helper function to check for errors
-        if(s.equals("")){
+        if (s.trim().isEmpty()) {
             throw new IllegalArgumentException("empty input");
         }
-        String[] stringArr = s.split("\\s+");
+        String[] stringArr = s.trim().split("\\s+");
         //check validitiy first
-        int numCount = 0;
-        int operCount = 0;
-        /*if(!(isNumber(stringArr[0]))){
-            throw new IllegalArgumentException("invalid expression");
-        }*/
         for(int i=0;i<stringArr.length;i++){
             //need to check if it's a number or operator
             if(!(isNumber(stringArr[i])) && !(stringArr[i].equals("/")) && !(stringArr[i].equals("+")) && !(stringArr[i].equals("^"))
                     && !(stringArr[i].equals("*")) && !(stringArr[i].equals("-"))){
                 throw new IllegalArgumentException("invalid token");
             }
-            if(isNumber(stringArr[i])){
-                numCount++;
+        }
+        //only when it's not error, do the actual operations
+        ArrayStack<AST> a = new ArrayStack();
+        for (int i = 0; i < stringArr.length; i++) {
+            if (isNumber(stringArr[i])) {
+                a.push(new NumNode(Double.parseDouble(stringArr[i])));
             }
-            else if(stringArr[i].equals("/") || stringArr[i].equals("+") || stringArr[i].equals("^")
+            //need to appy the operation somehow?
+            else if (stringArr[i].equals("/") || stringArr[i].equals("+") || stringArr[i].equals("^")
                     || stringArr[i].equals("*") || stringArr[i].equals("-")){
-                operCount++;
+                if(!(a.size() >=2)){
+                    throw new IllegalArgumentException("insufficient operands");
+                }
+                AST right = a.pop();
+                AST left = a.pop();
+                BinopNode expr = new BinopNode(stringArr[i], left,right);
+                a.push(expr);
             }
         }
-        if(numCount==operCount){
-            throw new IllegalArgumentException("insufficient operands");
-        }
-        else if(!(numCount-operCount==1) && numCount-operCount>0){
+        if(!(a.size()==1)){
             throw new IllegalArgumentException("too many operands");
         }
-        else {
-            //only when it's not error, do the actual operations
-            ArrayStack<AST> a = new ArrayStack();
-            for (int i = 0; i < stringArr.length; i++) {
-                if (isNumber(stringArr[i])) {
-                    a.push(new NumNode(Double.parseDouble(stringArr[i])));
-                }
-                //need to appy the operation somehow?
-                else if (stringArr[i].equals("/") || stringArr[i].equals("+") || stringArr[i].equals("^")
-                        || stringArr[i].equals("*") || stringArr[i].equals("-")){
-                    AST right = a.pop();
-                    AST left = a.pop();
-                    BinopNode expr = new BinopNode(stringArr[i], left,right);
-                    a.push(expr);
-                }
-            }
-            return a.pop();
-        }
+        return a.pop();
+
     }
 
     public AST parseInfix(String s){
