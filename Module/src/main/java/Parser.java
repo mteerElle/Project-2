@@ -40,7 +40,7 @@ public class Parser {
                 //need to appy the operation somehow?
                 else if (stringArr[i].equals("/") || stringArr[i].equals("+") || stringArr[i].equals("^")
                         || stringArr[i].equals("*") || stringArr[i].equals("-")){
-                    BinopNode expr = new BinopNode(stringArr[i], (AST) a.pop(), (AST) a.pop());
+                    BinopNode expr = new BinopNode(stringArr[i], a.pop(), a.pop());
                     a.push(expr);
                 }
             }
@@ -60,9 +60,9 @@ public class Parser {
             else if(stringArr[i].equals("/") || stringArr[i].equals("+") || stringArr[i].equals("^")
                     || stringArr[i].equals("*")){
                 if(value.size()==2){
-                    BinopNode expr = new BinopNode(stringArr[i], (AST) value.pop(), (AST) value.pop());
+                    BinopNode expr = new BinopNode(stringArr[i], value.pop(), value.pop());
                 }
-                operations.push(stringArr[i]);
+                operations.push(expr);
             }
         }
 
