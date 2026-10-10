@@ -8,9 +8,9 @@ public class Parser {
          }
      }
 
-    public AST parsePostfix(String s){
+    public static AST parsePostfix(String s){
          //maybe create a helper function to check for errors
-        if(s.equals(" ")){
+        if(s.equals("")){
             throw new IllegalArgumentException("empty input");
         }
         String[] stringArr = s.split(" ");
@@ -33,16 +33,16 @@ public class Parser {
             }
         }
         if(numCount==operCount){
-            throw new IllegalArgumentException("insufficient operants");
+            throw new IllegalArgumentException("insufficient operands");
         }
         else if(!(numCount-operCount==1)){
             throw new IllegalArgumentException("too many operands");
         }
         else {
             //only when it's not error, do the actual operations
-            ArrayStack a = new ArrayStack();
+            ArrayStack<AST> a = new ArrayStack();
             for (int i = 0; i < stringArr.length; i++) {
-                if (Integer.parseInt(stringArr[i]) < Integer.MAX_VALUE) {
+                if (isNumber(stringArr[i])) {
                     a.push(new NumNode(Double.parseDouble(stringArr[i])));
                 }
                 //where does BinopNode take in an operator?
@@ -53,7 +53,7 @@ public class Parser {
                     a.push(expr);
                 }
             }
-            return (AST) a;
+            return a.pop();
         }
     }
 
@@ -63,7 +63,7 @@ public class Parser {
          //check for errors
         String[] stringArr = s.split(" ");
         for(int i=0;i<stringArr.length;i++){
-            if(/*it is a number*/){
+            if(isNumber(stringArr[i])){
                 value.push(new NumNode(Integer.parseInt(stringArr[i])));
             }
             else if(stringArr[i].equals("/") || stringArr[i].equals("+") || stringArr[i].equals("^")

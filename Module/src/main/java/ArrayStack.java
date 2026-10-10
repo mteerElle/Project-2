@@ -1,14 +1,14 @@
 import java.util.Objects;
 
-public class ArrayStack {
+public class ArrayStack<T> {
 
     //fields
     public AST[] arr;
     public int alive;
 
     //Constructor
-    public ArrayStack(){
-        arr = new AST[10];
+    public ArrayStack(AST[] arr){
+        this.arr = arr;
         alive= 0;
     }
 
