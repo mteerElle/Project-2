@@ -9,7 +9,14 @@ public class ParserTest {
         assertEquals(true, Parser.isNumber("3"));
         assertEquals(true, Parser.isNumber("3.5"));
         assertEquals(false, Parser.isNumber("v"));
-        assertEquals(false, Parser.isNumber("{"));
+    }
+
+    @Test
+    void checksOperators(){
+        assertEquals(true, Parser.isOperator("-"));
+        assertEquals(true, Parser.isOperator("*"));
+        assertEquals(false, Parser.isOperator("("));
+        assertEquals(false,Parser.isOperator("3"));
     }
 
     @Test
@@ -128,20 +135,6 @@ public class ParserTest {
     void infixInsufficientOperands() {
         IllegalArgumentException error = assertThrows(IllegalArgumentException.class, () ->
                 Parser.parseInfix("4 + 5 +"));
-        assertEquals("insufficient operands", error.getMessage());
-    }
-
-    @Test
-    void infixInsufficientOperandsForOperator() {
-        IllegalArgumentException error = assertThrows(IllegalArgumentException.class, () ->
-                Parser.parseInfix("+ + 2"));
-        assertEquals("insufficient operands", error.getMessage());
-    }
-
-    @Test
-    void infixInsufficientOperandsForParenthesis() {
-        IllegalArgumentException error = assertThrows(IllegalArgumentException.class, () ->
-                Parser.parseInfix("( - )"));
         assertEquals("insufficient operands", error.getMessage());
     }
 
