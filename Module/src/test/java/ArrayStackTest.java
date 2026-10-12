@@ -40,5 +40,5 @@ public class ArrayStackTest {
         assertEquals(1, arr.size());
 
     }
-    
+
 }

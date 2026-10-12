@@ -12,10 +12,12 @@ public class ArrayStack<T> {
         alive= 0;
     }
 
+    //makes an empty stack
     public static <T> ArrayStack<T> emptyStack(){
         return new ArrayStack<T>();
     }
 
+    //pushing new object onto stack
     public void push( T t){
         Object[] ar = new Object[alive +1];
         for(int i=0; i < alive; i++){
@@ -27,6 +29,7 @@ public class ArrayStack<T> {
         alive++;
     }
 
+    //pops last item on stack
     public T pop(){
         if(alive ==0){
             throw new IndexOutOfBoundsException();
@@ -37,6 +40,7 @@ public class ArrayStack<T> {
         return o;
     }
 
+        // tells u whats on top of stack
     public T peek(){
         if(alive==0){
             throw new IndexOutOfBoundsException("Stacks empty");
@@ -44,6 +48,7 @@ public class ArrayStack<T> {
         return (T) arr[alive-1];
     }
 
+    //tells if stack is empty
     public boolean isEmpty(){
         if(alive ==0){
             return true;
@@ -51,6 +56,7 @@ public class ArrayStack<T> {
         return false;
     }
 
+    //tells size of stack
     public int size(){
         return alive;
     }

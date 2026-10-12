@@ -6,6 +6,7 @@ public record BinopNode(String op, AST n1, AST n2) implements AST{
     public record plusx(AST n1, AST n2){}
     public record powx(AST n1, AST n2){}*/
 
+    //evaluates
     public double eval(){
         //I think you can just use op, like say is op.equals("*"), then multiply n1 and n2.
         if(op.equals("^")){
