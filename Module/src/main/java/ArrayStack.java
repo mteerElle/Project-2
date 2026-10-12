@@ -21,7 +21,7 @@ public class ArrayStack<T> {
         for(int i=0; i < alive; i++){
             ar[i] = arr[i];
         }
-        arr[alive] = t;
+        ar[alive] = t;
         arr = ar;
 
         alive++;
