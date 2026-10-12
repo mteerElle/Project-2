@@ -8,11 +8,21 @@ public record BinopNode(String op, AST n1, AST n2) implements AST{
 
     public double eval(){
         //I think you can just use op, like say is op.equals("*"), then multiply n1 and n2.
-        if(this instanceof NumNode){
-            return this.dval;
+        if(op.equals("^")){
+            return Math.pow(n1.eval(), n2.eval());
         }
-        else{
-            return this.branch1.eval() + this.branch2.eval();
+        if(op.equals("*")){
+            return n1.eval() * n2.eval();
         }
+        if(op.equals("/")){
+            return n1.eval()/n2.eval();
+        }
+        if(op.equals("+")){
+            return n1.eval() + n2.eval();
+        }
+        if(op.equals("-")){
+            return n1.eval() - n2.eval();
+        }
+        throw new IllegalArgumentException("thats not an op?");
     }
 }

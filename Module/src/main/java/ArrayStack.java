@@ -3,39 +3,45 @@ import java.util.Objects;
 public class ArrayStack<T> {
 
     //fields
-    public AST[] arr;
+    public Object[] arr;
     public int alive;
 
     //Constructor
-    public ArrayStack(AST[] arr){
-        this.arr = arr;
+    public ArrayStack(){
+        arr= new Object[0];
         alive= 0;
     }
 
-    public static ArrayStack emptyStack(){
-        return new ArrayStack();
+    public static <T> ArrayStack<T> emptyStack(){
+        return new ArrayStack<T>();
     }
 
     public void push( AST t){
+        Object[] ar = new Object[alive +1];
+        for(int i=0; i < alive; i++){
+            ar[i] = arr[i];
+        }
         arr[alive] = t;
+        arr = ar;
+
         alive++;
     }
 
-    public AST pop(){
+    public T pop(){
         if(alive ==0){
             throw new IndexOutOfBoundsException();
         }
-        AST o = arr[alive];
-        arr[alive]=null;
+        T o = (T) arr[alive-1];
+        arr[alive-1]=null;
         alive--;
         return o;
     }
 
-    public AST peek(){
+    public T peek(){
         if(alive==0){
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("Stacks empty");
         }
-        return arr[alive];
+        return (T) arr[alive-1];
     }
 
     public boolean isEmpty(){
