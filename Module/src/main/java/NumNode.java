@@ -1,9 +1,6 @@
-public class NumNode implements AST {
+public record NumNode(double n) implements AST {
 
-    public record numx(int num){}
-    double dval;
-
-    NumNode(double dval){
-        this.dval = dval;
+    public double eval(){
+        return n;
     }
 }

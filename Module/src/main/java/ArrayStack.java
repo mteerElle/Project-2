@@ -1,14 +1,14 @@
 import java.util.Objects;
 
-public class ArrayStack {
+public class ArrayStack<T> {
 
     //fields
     public AST[] arr;
     public int alive;
 
     //Constructor
-    public ArrayStack(){
-        arr = new AST[10];
+    public ArrayStack(AST[] arr){
+        this.arr = arr;
         alive= 0;
     }
 
@@ -21,17 +21,17 @@ public class ArrayStack {
         alive++;
     }
 
-    public Object pop(){
+    public AST pop(){
         if(alive ==0){
             throw new IndexOutOfBoundsException();
         }
-        Object o = arr[alive];
+        AST o = arr[alive];
         arr[alive]=null;
         alive--;
         return o;
     }
 
-    public Object peek(){
+    public AST peek(){
         if(alive==0){
             throw new IndexOutOfBoundsException();
         }
