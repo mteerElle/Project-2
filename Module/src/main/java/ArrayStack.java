@@ -16,7 +16,7 @@ public class ArrayStack<T> {
         return new ArrayStack<T>();
     }
 
-    public void push( AST t){
+    public void push( T t){
         Object[] ar = new Object[alive +1];
         for(int i=0; i < alive; i++){
             ar[i] = arr[i];
