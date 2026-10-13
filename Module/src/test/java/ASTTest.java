@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class ASTTest {
@@ -23,5 +24,12 @@ public class ASTTest {
 
         AST rand = Parser.parseInfix(( "3 * 4 - 2 + 5 ^ 2"));
         assertEquals(35, rand.eval());
+
+        AST error = new BinopNode("%", new NumNode(2), new NumNode(3));
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
+                error.eval());
+        assertEquals("thats not an op?", e.getMessage());
+
+
     }
 }
